@@ -1,0 +1,60 @@
+public class SistemaHospital {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        GestorCitas gestor = new GestorCitas();
+        int opcion;
+
+        do {
+            System.out.println("\n--- Sistema de Gestión de Citas Médicas ---");
+            System.out.println("1. Registrar un médico");
+            System.out.println("2. Registrar un usuario");
+            System.out.println("3. Reservar una cita");
+            System.out.println("4. Cancelar una cita");
+            System.out.println("5. Mostrar citas");
+            System.out.println("6. Salir");
+            System.out.print("Seleccione una opción: ");
+            opcion = scanner.nextInt();
+            scanner.nextLine(); // Consumir la nueva línea
+
+            switch (opcion) {
+                case 1 -> {
+                    System.out.print("ID del médico: ");
+                    String idMedico = scanner.nextLine();
+                    System.out.print("Nombre del médico: ");
+                    String nombre = scanner.nextLine();
+                    System.out.print("Especialidad: ");
+                    String especialidad = scanner.nextLine();
+                    gestor.registrarMedico(new Medico(idMedico, nombre, especialidad));
+                }
+                case 2 -> {
+                    System.out.print("ID del usuario: ");
+                    String idUsuario = scanner.nextLine();
+                    System.out.print("Nombre del usuario: ");
+                    String nombre = scanner.nextLine();
+                    gestor.registrarUsuario(new Usuario(idUsuario, nombre));
+                }
+                case 3 -> {
+                    System.out.print("ID del usuario: ");
+                    String idUsuario = scanner.nextLine();
+                    System.out.print("ID del médico: ");
+                    String idMedico = scanner.nextLine();
+                    System.out.print("Fecha de la cita (YYYY-MM-DD): ");
+                    String fecha = scanner.nextLine();
+                    System.out.print("Hora de la cita (HH:MM): ");
+                    String hora = scanner.nextLine();
+                    gestor.reservarCita(new Cita(fecha, hora, idUsuario, idMedico));
+                }
+                case 4 -> {
+                    System.out.print("ID de la cita a cancelar: ");
+                    String idCita = scanner.nextLine();
+                    gestor.cancelarCita(idCita);
+                }
+                case 5 -> gestor.mostrarCitas();
+                case 6 -> System.out.println("¡Hasta luego!");
+                default -> System.out.println("Opción no válida.");
+            }
+        } while (opcion != 6);
+
+        scanner.close();
+    }
+}
