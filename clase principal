@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class SistemaHospital {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -11,7 +13,11 @@ public class SistemaHospital {
             System.out.println("3. Reservar una cita");
             System.out.println("4. Cancelar una cita");
             System.out.println("5. Mostrar citas");
-            System.out.println("6. Salir");
+            System.out.println("6. Agregar especialidad médica");
+            System.out.println("7. Consultar historial clínico de un usuario");
+            System.out.println("8. Procesar pago de una cita");
+            System.out.println("9. Generar receta médica");
+            System.out.println("10. Salir");
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
             scanner.nextLine(); // Consumir la nueva línea
@@ -50,11 +56,37 @@ public class SistemaHospital {
                     gestor.cancelarCita(idCita);
                 }
                 case 5 -> gestor.mostrarCitas();
-                case 6 -> System.out.println("¡Hasta luego!");
+                case 6 -> {
+                    System.out.print("Nombre de la especialidad médica: ");
+                    String nombre = scanner.nextLine();
+                    gestor.agregarEspecialidad(new EspecialidadMedica(nombre));
+                }
+                case 7 -> {
+                    System.out.print("ID del usuario: ");
+                    String idUsuario = scanner.nextLine();
+                    gestor.mostrarHistorialClinico(idUsuario);
+                }
+                case 8 -> {
+                    System.out.print("ID de la cita: ");
+                    String idCita = scanner.nextLine();
+                    System.out.print("Monto a pagar: ");
+                    double monto = scanner.nextDouble();
+                    scanner.nextLine(); // Consumir la nueva línea
+                    gestor.procesarPago(new PagoCita(idCita, monto));
+                }
+                case 9 -> {
+                    System.out.print("ID de la cita: ");
+                    String idCita = scanner.nextLine();
+                    System.out.print("Detalles de la receta: ");
+                    String detalles = scanner.nextLine();
+                    gestor.generarReceta(new RecetaMedica(idCita, detalles));
+                }
+                case 10 -> System.out.println("¡Hasta luego!");
                 default -> System.out.println("Opción no válida.");
             }
-        } while (opcion != 6);
+        } while (opcion != 10);
 
         scanner.close();
     }
 }
+
