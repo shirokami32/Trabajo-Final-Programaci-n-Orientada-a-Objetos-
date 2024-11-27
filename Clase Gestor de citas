@@ -1,0 +1,19 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class GestorCitas {
+    private List<Usuario> usuarios = new ArrayList<>();
+    private List<Medico> medicos = new ArrayList<>();
+    private List<Cita> citas = new ArrayList<>();
+    private List<EspecialidadMedica> especialidades = new ArrayList<>();
+    private List<PagoCita> pagos = new ArrayList<>();
+    private List<RecetaMedica> recetas = new ArrayList<>();
+    private List<HistorialClinico> historiales = new ArrayList<>();
+
+    public void registrarUsuario(Usuario usuario) {
+        usuarios.add(usuario);
+        historiales.add(new HistorialClinico(usuario.getId()));
+        System.out.println("Usuario registrado: " + usuario.getNombre());
+    }
+
+    public void registrarMedico(Medico medico) {
