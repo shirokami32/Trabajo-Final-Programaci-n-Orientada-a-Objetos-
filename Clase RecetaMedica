@@ -1,0 +1,22 @@
+public class RecetaMedica {
+    private String idCita;
+    private String detalles;
+
+    public RecetaMedica(String idCita, String detalles) {
+        this.idCita = idCita;
+        this.detalles = detalles;
+    }
+
+    public String getIdCita() {
+        return idCita;
+    }
+
+    public String getDetalles() {
+        return detalles;
+    }
+
+    @Override
+    public String toString() {
+        return "Receta para la Cita ID: " + idCita + ", Detalles: " + detalles;
+    }
+}
