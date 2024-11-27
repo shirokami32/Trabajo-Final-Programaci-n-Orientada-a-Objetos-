@@ -1,0 +1,29 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class HistorialClinico {
+    private String idUsuario;
+    private List<String> registros;
+
+    public HistorialClinico(String idUsuario) {
+        this.idUsuario = idUsuario;
+        this.registros = new ArrayList<>();
+    }
+
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void agregarRegistro(String registro) {
+        registros.add(registro);
+    }
+
+    public List<String> getRegistros() {
+        return registros;
+    }
+
+    @Override
+    public String toString() {
+        return "Historial Clínico para Usuario ID: " + idUsuario + "\nRegistros: " + registros;
+    }
+}
