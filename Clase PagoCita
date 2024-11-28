@@ -1,0 +1,24 @@
+// Clase PagoCita
+class PagoCita implements Identificable {
+    private String idCita;
+    private double monto;
+
+    public PagoCita(String idCita, double monto) {
+        this.idCita = idCita;
+        this.monto = monto;
+    }
+
+    @Override
+    public String getId() {
+        return idCita;
+    }
+
+    public double getMonto() {
+        return monto;
+    }
+
+    @Override
+    public String toString() {
+        return "Pago para la Cita ID: " + idCita + ", Monto: $" + monto;
+    }
+}
