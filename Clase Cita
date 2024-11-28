@@ -1,0 +1,44 @@
+// Clase Cita
+class Cita implements Identificable {
+    private static int contador = 1;
+    private String idCita;
+    private String fecha;
+    private String hora;
+    private String idUsuario;
+    private String idMedico;
+
+    public Cita(String fecha, String hora, String idUsuario, String idMedico) {
+        this.idCita = "C" + contador++;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.idUsuario = idUsuario;
+        this.idMedico = idMedico;
+    }
+
+    @Override
+    public String getId() {
+        return idCita;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public String getIdMedico() {
+        return idMedico;
+    }
+
+    @Override
+    public String toString() {
+        return "Cita ID: " + idCita + ", Fecha: " + fecha + ", Hora: " + hora +
+                ", Usuario ID: " + idUsuario + ", Médico ID: " + idMedico;
+    }
+}
