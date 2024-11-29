@@ -1,5 +1,4 @@
-import java.util.Scanner;
-
+// Clase principal
 public class SistemaHospital {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -44,7 +43,7 @@ public class SistemaHospital {
                     String idUsuario = scanner.nextLine();
                     System.out.print("ID del médico: ");
                     String idMedico = scanner.nextLine();
-                    System.out.print("Fecha de la cita (YYYY-MM-DD): ");
+                    System.out.print("Fecha de la cita (DD-MM-YYYY): ");
                     String fecha = scanner.nextLine();
                     System.out.print("Hora de la cita (HH:MM): ");
                     String hora = scanner.nextLine();
@@ -89,4 +88,3 @@ public class SistemaHospital {
         scanner.close();
     }
 }
-
