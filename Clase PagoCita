@@ -19,6 +19,6 @@ class PagoCita implements Identificable {
 
     @Override
     public String toString() {
-        return "Pago para la Cita ID: " + idCita + ", Monto: $" + monto;
+        return "Pago para la Cita ID: " + idCita + ", Monto: S/" + monto;
     }
 }
