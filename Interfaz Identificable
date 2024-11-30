@@ -1,0 +1,4 @@
+// Interfaz para elementos identificables
+interface Identificable {
+    String getId();
+}
