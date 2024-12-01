@@ -1,12 +1,11 @@
-import java.util.ArrayList;
-import java.util.List;
-
-public class HistorialClinico {
+class HistorialClinico {
     private String idUsuario;
+    private String nombreUsuario;
     private List<String> registros;
 
-    public HistorialClinico(String idUsuario) {
+    public HistorialClinico(String idUsuario, String nombreUsuario) {
         this.idUsuario = idUsuario;
+        this.nombreUsuario = nombreUsuario;
         this.registros = new ArrayList<>();
     }
 
@@ -18,12 +17,15 @@ public class HistorialClinico {
         registros.add(registro);
     }
 
-    public List<String> getRegistros() {
-        return registros;
-    }
-
     @Override
     public String toString() {
-        return "Historial Clínico para Usuario ID: " + idUsuario + "\nRegistros: " + registros;
+        StringBuilder sb = new StringBuilder();
+        sb.append("ID del usuario: ").append(idUsuario).append("\n");
+        sb.append("Nombre del usuario: ").append(nombreUsuario).append("\n");
+        sb.append("Historial Clínico para el usuario \"").append(nombreUsuario).append("\":\n");
+        for (String registro : registros) {
+            sb.append("- ").append(registro).append("\n");
+        }
+        return sb.toString();
     }
 }
