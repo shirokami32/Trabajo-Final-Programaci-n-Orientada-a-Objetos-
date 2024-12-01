@@ -1,4 +1,3 @@
-// Clase GestorCitas
 class GestorCitas {
     private List<Usuario> usuarios = new ArrayList<>();
     private List<Medico> medicos = new ArrayList<>();
@@ -10,7 +9,7 @@ class GestorCitas {
 
     public void registrarUsuario(Usuario usuario) {
         usuarios.add(usuario);
-        historiales.add(new HistorialClinico(usuario.getId(), usuario.getNombre())); // Agregar el nombre
+        historiales.add(new HistorialClinico(usuario.getId(), usuario.getNombre()));
         System.out.println("Usuario registrado: " + usuario.getNombre());
     }
 
@@ -27,8 +26,16 @@ class GestorCitas {
     }
 
     public void registrarMedico(Medico medico) {
-        medicos.add(medico);
-        System.out.println("Médico registrado: " + medico.getNombre());
+        // Verificar si la especialidad está registrada
+        boolean especialidadExiste = especialidades.stream()
+                .anyMatch(especialidad -> especialidad.getNombre().equalsIgnoreCase(medico.getEspecialidad()));
+
+        if (especialidadExiste) {
+            medicos.add(medico);
+            System.out.println("Médico registrado: " + medico.getNombre() + " - Especialidad: " + medico.getEspecialidad());
+        } else {
+            System.out.println("Error: La especialidad \"" + medico.getEspecialidad() + "\" no está registrada.");
+        }
     }
 
     public void reservarCita(Cita cita) {
