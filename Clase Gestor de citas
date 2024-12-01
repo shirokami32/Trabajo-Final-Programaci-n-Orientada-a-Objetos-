@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-import java.util.List;
-
-public class GestorCitas {
+// Clase GestorCitas
+class GestorCitas {
     private List<Usuario> usuarios = new ArrayList<>();
     private List<Medico> medicos = new ArrayList<>();
     private List<Cita> citas = new ArrayList<>();
@@ -12,8 +10,79 @@ public class GestorCitas {
 
     public void registrarUsuario(Usuario usuario) {
         usuarios.add(usuario);
-        historiales.add(new HistorialClinico(usuario.getId()));
+        historiales.add(new HistorialClinico(usuario.getId(), usuario.getNombre())); // Agregar el nombre
         System.out.println("Usuario registrado: " + usuario.getNombre());
     }
 
+    public void agregarHistorialClinico(HistorialClinico historial) {
+        historiales.add(historial);
+        System.out.println("Historial clínico agregado para el usuario: " + historial.getIdUsuario());
+    }
+
+    public HistorialClinico obtenerHistorialClinico(String idUsuario) {
+        return historiales.stream()
+                .filter(historial -> historial.getIdUsuario().equals(idUsuario))
+                .findFirst()
+                .orElse(null);
+    }
+
     public void registrarMedico(Medico medico) {
+        medicos.add(medico);
+        System.out.println("Médico registrado: " + medico.getNombre());
+    }
+
+    public void reservarCita(Cita cita) {
+        boolean usuarioExiste = usuarios.stream().anyMatch(u -> u.getId().equals(cita.getIdUsuario()));
+        boolean medicoExiste = medicos.stream().anyMatch(m -> m.getId().equals(cita.getIdMedico()));
+        if (usuarioExiste && medicoExiste) {
+            citas.add(cita);
+            System.out.println("Cita registrada: " + cita);
+        } else {
+            System.out.println("Error: Usuario o Médico no registrado.");
+        }
+    }
+
+    public void cancelarCita(String idCita) {
+        boolean removed = citas.removeIf(c -> c.getId().equals(idCita));
+        if (removed) {
+            System.out.println("Cita cancelada con ID: " + idCita);
+        } else {
+            System.out.println("Cita no encontrada.");
+        }
+    }
+
+    public void mostrarCitas() {
+        if (citas.isEmpty()) {
+            System.out.println("No hay citas registradas.");
+        } else {
+            citas.forEach(System.out::println);
+        }
+    }
+
+    public void agregarEspecialidad(EspecialidadMedica especialidad) {
+        especialidades.add(especialidad);
+        System.out.println("Especialidad médica agregada: " + especialidad.getNombre());
+    }
+
+    public void mostrarHistorialClinico(String idUsuario) {
+        HistorialClinico historial = historiales.stream()
+                .filter(h -> h.getIdUsuario().equals(idUsuario))
+                .findFirst()
+                .orElse(null);
+        if (historial != null) {
+            System.out.println(historial);
+        } else {
+            System.out.println("Historial clínico no encontrado para Usuario ID: " + idUsuario);
+        }
+    }
+
+    public void procesarPago(PagoCita pago) {
+        pagos.add(pago);
+        System.out.println("Pago procesado: " + pago);
+    }
+
+    public void generarReceta(RecetaMedica receta) {
+        recetas.add(receta);
+        System.out.println("Receta generada: " + receta);
+    }
+}
