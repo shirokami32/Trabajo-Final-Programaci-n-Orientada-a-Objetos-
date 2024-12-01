@@ -29,6 +29,7 @@ public class SistemaHospital {
                     String nombre = scanner.nextLine();
                     System.out.print("Especialidad: ");
                     String especialidad = scanner.nextLine();
+
                     gestor.registrarMedico(new Medico(idMedico, nombre, especialidad));
                 }
                 case 2 -> {
