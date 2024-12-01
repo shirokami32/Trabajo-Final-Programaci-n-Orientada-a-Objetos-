@@ -36,14 +36,42 @@ public class SistemaHospital {
                     String idUsuario = scanner.nextLine();
                     System.out.print("Nombre del usuario: ");
                     String nombre = scanner.nextLine();
-                    gestor.registrarUsuario(new Usuario(idUsuario, nombre));
+
+                    System.out.print("¿Tiene visitas previas? (si/no): ");
+                    String tieneVisitasPrevias = scanner.nextLine();
+                    System.out.print("¿Tiene problemas congénitos o enfermedades crónicas? (si/no): ");
+                    String tieneProblemasCongenitos = scanner.nextLine();
+                    List<String> problemasCongenitos = new ArrayList<>();
+                    if (tieneProblemasCongenitos.equalsIgnoreCase("si")) {
+                        System.out.print("Ingrese los problemas separados por comas: ");
+                        for (String problema : scanner.nextLine().split(",")) {
+                            problemasCongenitos.add(problema.trim());
+                        }
+                    }
+
+                    System.out.print("¿Tiene alergias? (si/no): ");
+                    String tieneAlergias = scanner.nextLine();
+                    List<String> alergias = new ArrayList<>();
+                    if (tieneAlergias.equalsIgnoreCase("si")) {
+                        System.out.print("Ingrese las alergias separadas por comas: ");
+                        for (String alergia : scanner.nextLine().split(",")) {
+                            alergias.add(alergia.trim());
+                        }
+                    }
+
+                    HistorialClinico historial = new HistorialClinico(idUsuario, nombre);
+                    historial.agregarRegistro("Visitas previas: " + (tieneVisitasPrevias.equalsIgnoreCase("si") ? "Si" : "No"));
+                    historial.agregarRegistro("Problemas congénitos o crónicos: " + (problemasCongenitos.isEmpty() ? "No" : String.join(", ", problemasCongenitos)));
+                    historial.agregarRegistro("Alergias: " + (alergias.isEmpty() ? "No" : String.join(", ", alergias)));
+
+                    gestor.agregarHistorialClinico(historial);
                 }
                 case 3 -> {
                     System.out.print("ID del usuario: ");
                     String idUsuario = scanner.nextLine();
                     System.out.print("ID del médico: ");
                     String idMedico = scanner.nextLine();
-                    System.out.print("Fecha de la cita (DD-MM-YYYY): ");
+                    System.out.print("Fecha de la cita (YYYY-MM-DD): ");
                     String fecha = scanner.nextLine();
                     System.out.print("Hora de la cita (HH:MM): ");
                     String hora = scanner.nextLine();
@@ -63,7 +91,12 @@ public class SistemaHospital {
                 case 7 -> {
                     System.out.print("ID del usuario: ");
                     String idUsuario = scanner.nextLine();
-                    gestor.mostrarHistorialClinico(idUsuario);
+                    HistorialClinico historial = gestor.obtenerHistorialClinico(idUsuario);
+                    if (historial != null) {
+                        System.out.println(historial);
+                    } else {
+                        System.out.println("Historial clínico no encontrado.");
+                    }
                 }
                 case 8 -> {
                     System.out.print("ID de la cita: ");
