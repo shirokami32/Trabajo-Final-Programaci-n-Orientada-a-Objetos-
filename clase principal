@@ -72,7 +72,7 @@ public class SistemaHospital {
                     String idUsuario = scanner.nextLine();
                     System.out.print("ID del médico: ");
                     String idMedico = scanner.nextLine();
-                    System.out.print("Fecha de la cita (YYYY-MM-DD): ");
+                    System.out.print("Fecha de la cita (DD-MM-AAAA): ");
                     String fecha = scanner.nextLine();
                     System.out.print("Hora de la cita (HH:MM): ");
                     String hora = scanner.nextLine();
